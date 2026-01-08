@@ -36,6 +36,19 @@ public class ConnectFour {
                 scanner.next(); //ungültige eingabe verwerfen
             }
         }
+
+        System.out.println("Möchtest du nochmal spielen? Fals ja schreibe y in die Console!");
+
+        while (game.getCurrentStatus() != 0) {
+            if (scanner.next().equals("y")) {
+                game.reset();
+                play();
+                return;
+            } else {
+                System.out.println("Das spiel wurde beendet");
+                break;
+            }
+        }
     }
 
     public ConnectFour() {
@@ -77,7 +90,6 @@ public class ConnectFour {
 
         //Setzen des Spielsteins
         field[findFreeRow(column)][column] = currentPlayer;
-        rounds++;
 
         int winner = hasWon();
         if (winner != 0) {
@@ -86,6 +98,7 @@ public class ConnectFour {
             status = 3; //Unentschieden
         } else {
             switchPlayer();
+            rounds++;
         }
 
         printBoard();
