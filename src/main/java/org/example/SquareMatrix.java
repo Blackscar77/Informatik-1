@@ -38,7 +38,7 @@ public class SquareMatrix {
 
         SquareMatrix matrixB = new SquareMatrix(b);
 
-        System.out.println("2x2");
+        System.out.println("Tests 2x2");
 
         System.out.println("matrixA:");
         System.out.println(matrixA.toString());
@@ -74,9 +74,54 @@ public class SquareMatrix {
         System.out.println(matrixA);
 
 
-        System.out.println("3x3");
+        System.out.println("Tests 3x3");
+
+        // Matrix A: 1 bis 9
+        int[][] c = new int[3][3];
+        c[0][0] = 1; c[0][1] = 2; c[0][2] = 3;
+        c[1][0] = 4; c[1][1] = 5; c[1][2] = 6;
+        c[2][0] = 7; c[2][1] = 8; c[2][2] = 9;
+        SquareMatrix matrixC = new SquareMatrix(c);
+
+        // Matrix B: 10er bis 1000er Schritte für klare Addition
+        int[][] d = new int[3][3];
+        d[0][0] = 10;   d[0][1] = 20;   d[0][2] = 30;
+        d[1][0] = 100;  d[1][1] = 200;  d[1][2] = 300;
+        d[2][0] = 1000; d[2][1] = 2000; d[2][2] = 3000;
+        SquareMatrix matrixD = new SquareMatrix(d);
+
+        System.out.println("matrixC:");
+        System.out.println(matrixC.toString());
+        System.out.println("matrixD:");
+        System.out.println(matrixD.toString());
 
 
+        System.out.println("add:");
+        System.out.println(matrixC.add(matrixD));
+
+
+        System.out.println("addInplace: 1. print matrixA, add matrixB to MatrixA --> 3. print matrixA");
+        System.out.println(matrixC);
+        matrixA.addInplace(matrixD);
+        System.out.println(matrixC);
+
+
+        //Es wird mit der addierten matrixA weitergemacht
+        System.out.println("Transpose:");
+        System.out.println(matrixC.transpose());
+
+        System.out.println("transposeInplace:");
+        matrixC.transposeInplace();
+        System.out.println(matrixC);
+
+
+        //Es wird mit der addierten und transponierten matrixA weitergemacht
+        System.out.println("Rotate:");
+        System.out.println(matrixC.rotate());
+
+        System.out.println("RotateInplace:");
+        matrixC.rotateInplace();
+        System.out.println(matrixC);
     }
 
     public SquareMatrix(int[][] data) {

@@ -15,9 +15,56 @@ public class ConnectFour {
     private int rounds = 1; //Anzahl der bereits gespielten Runden
 
     public static void main(String[] args) {
-        play();
+        ConnectFour game = new ConnectFour();
 
-        //connectFour.dropDisc(4);
+        //Tests
+
+        System.out.println("Start Tests: ");
+
+        // 1. Test: Initialzustand
+        System.out.println("Test 1 (Initialer Spieler): " + (game.getCurrentPlayer() == 1 ? "OK" : "FEHLER"));
+        System.out.println("Test 2 (Initialer Status): " + (game.getCurrentStatus() == 0 ? "OK" : "FEHLER"));
+
+        // 2. Test: dropDisc & switchPlayer
+        game.dropDisc(3); // Spieler 1 setzt
+        System.out.println("Test 3 (Spielerwechsel zu P2): " + (game.getCurrentPlayer() == 2 ? "OK" : "FEHLER"));
+
+        // 3. Test: Ungültige Spalte (Error Handling)
+        System.out.print("Test 4 (Fehlermeldung bei Spalte 10): ");
+        game.dropDisc(10);
+
+        // 4. Test: Volle Spalte (indirekter Test für isColumnFull & findFreeRow)
+        System.out.println("Test 5 (Spalte füllen):");
+        game.dropDisc(0); // P2
+        game.dropDisc(0); // P1
+        game.dropDisc(0); // P2
+        game.dropDisc(0); // P1
+        game.dropDisc(0); // P2
+        game.dropDisc(0); // P1 -> Spalte 0 ist nun voll (6 Steine)
+        System.out.print("Test 6 (Meldung wenn Spalte voll): ");
+        game.dropDisc(0); // Sollte Fehlermeldung triggern
+
+        // 5. Test: Sieg-Logik (indirekter Test für hasWon)
+        System.out.println("SIMULATION SIEG Spieler 1 )");
+        game.reset();
+        game.dropDisc(0); // P1
+        game.dropDisc(0); // P2
+        game.dropDisc(1); // P1
+        game.dropDisc(1); // P2
+        game.dropDisc(2); // P1
+        game.dropDisc(2); // P2
+        game.dropDisc(3); // P1 setzt den 4. Stein horizontal
+
+        if (game.getCurrentStatus() == 1) {
+            System.out.println("Test 7 (Sieg-Erkennung): OK");
+        } else {
+            System.out.println("Test 7 (Sieg-Erkennung): FEHLER");
+        }
+
+        System.out.println("Ende Tests");
+
+        //Startet das richtige Spiel
+        //play();
     }
 
     /**
